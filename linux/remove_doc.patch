@@ -1,0 +1,63 @@
+--- PKGBUILD	2023-10-20 15:00:30.826700524 +0530
++++ PKGBUILD_NEW	2023-10-20 15:00:16.960013434 +0530
+@@ -17,12 +17,6 @@
+   python
+   tar
+   xz
+-
+-  # htmldocs
+-  graphviz
+-  imagemagick
+-  python-sphinx
+-  texlive-latexextra
+ )
+ options=('!strip')
+ _srcname=linux-${pkgver%.*}
+@@ -72,8 +66,7 @@
+ 
+   echo "Setting config..."
+   cp ../config .config
+-  #make olddefconfig
+-  make menuconfig
++  make olddefconfig
+   diff -u ../config .config || :
+ 
+   make -s kernelrelease > version
+@@ -83,7 +76,6 @@
+ build() {
+   cd $_srcname
+   make all
+-  make htmldocs
+ }
+ 
+ _package() {
+@@ -208,29 +200,9 @@
+   ln -sr "$builddir" "$pkgdir/usr/src/$pkgbase"
+ }
+ 
+-_package-docs() {
+-  pkgdesc="Documentation for the $pkgdesc kernel"
+-
+-  cd $_srcname
+-  local builddir="$pkgdir/usr/lib/modules/$(<version)/build"
+-
+-  echo "Installing documentation..."
+-  local src dst
+-  while read -rd '' src; do
+-    dst="${src#Documentation/}"
+-    dst="$builddir/Documentation/${dst#output/}"
+-    install -Dm644 "$src" "$dst"
+-  done < <(find Documentation -name '.*' -prune -o ! -type d -print0)
+-
+-  echo "Adding symlink..."
+-  mkdir -p "$pkgdir/usr/share/doc"
+-  ln -sr "$builddir/Documentation" "$pkgdir/usr/share/doc/$pkgbase"
+-}
+-
+ pkgname=(
+   "$pkgbase"
+   "$pkgbase-headers"
+-  "$pkgbase-docs"
+ )
+ for _p in "${pkgname[@]}"; do
+   eval "package_$_p() {
