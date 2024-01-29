@@ -1,0 +1,29 @@
+From 04112f65ec4099d43bca8c00acc61f3a2c0e185f Mon Sep 17 00:00:00 2001
+From: Christoffer Sandberg <cs@tuxedo.de>
+Date: Mon, 19 Jun 2023 15:46:52 +0200
+Subject: [PATCH] tuxedo_io: Adjust class_create call for kernel 6.4
+ compatibility
+
+Implements #82
+---
+ src/tuxedo_io/tuxedo_io.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/src/tuxedo_io/tuxedo_io.c b/src/tuxedo_io/tuxedo_io.c
+index 92ea34c..f420819 100644
+--- a/src/tuxedo_io/tuxedo_io.c
++++ b/src/tuxedo_io/tuxedo_io.c
+@@ -823,7 +823,13 @@ static int __init tuxedo_io_init(void)
+ 		pr_err("Failed to add cdev\n");
+ 		unregister_chrdev_region(tuxedo_io_device_handle, 1);
+ 	}
++
++#if LINUX_VERSION_CODE < KERNEL_VERSION(6, 4, 0)
+ 	tuxedo_io_device_class = class_create(THIS_MODULE, "tuxedo_io");
++#else
++	tuxedo_io_device_class = class_create("tuxedo_io");
++#endif
++
+ 	device_create(tuxedo_io_device_class, NULL, tuxedo_io_device_handle, NULL, "tuxedo_io");
+ 	pr_debug("Module init successful\n");
+ 	
