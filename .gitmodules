@@ -1,0 +1,3 @@
+[submodule "codetantra-sea"]
+	path = codetantra-sea
+	url = https://aur.archlinux.org/codetantra-sea.git
