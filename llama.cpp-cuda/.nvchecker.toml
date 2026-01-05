@@ -1,4 +1,4 @@
 ["llama.cpp-cuda"]
 source = "github"
-github = "ggerganov/llama.cpp"
+github = "ggml-org/llama.cpp"
 use_latest_release = true
