@@ -10,10 +10,10 @@ Or in multiple:
 ```
 git clone --depth 1 https://codeberg.org/shakakibara12/pkgbuilds
 cd pkgbilds
-git submodule init && git submodule update
+git submodule update --init
 ```
 
 ### llama.cpp
-For this pkgbuild due to constant upstreams releases, it is recommended to use pkgctl for updating it. It uses nvchecker to update the pkgbuild.
+For this pkgbuild due to constant upstreams releases, it is recommended to use `pkgctl` for updating it. It uses `nvchecker` to update the pkgbuild.
 
 `pkgctl version upgrade`

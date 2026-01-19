@@ -1,3 +1,6 @@
 [submodule "codetantra-sea"]
 	path = codetantra-sea
 	url = https://aur.archlinux.org/codetantra-sea.git
+[submodule "clevo-drivers"]
+	path = clevo-drivers
+	url = https://github.com/shakakibara12/clevo-drivers
