@@ -4,3 +4,6 @@
 [submodule "clevo-drivers"]
 	path = clevo-drivers
 	url = https://github.com/shakakibara12/clevo-drivers
+[submodule "monochrome-desktop-bin"]
+	path = monochrome-desktop-bin
+	url = https://aur.archlinux.org/monochrome-desktop-bin.git
